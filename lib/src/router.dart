@@ -11,7 +11,7 @@ final Route<A> Function<A>(Widget view) _kDefaultRouteWidgetBuilder =
 class NorseRouter {
   final String basePath;
 
-  final Function(String log) logger;
+  final Function(String? log)? logger;
 
   final List<NorsePath> children;
 
@@ -32,16 +32,16 @@ class NorseRouter {
     }
   }
 
-  Route Function([dynamic value]) _getRoutingPath(String route) {
+  Route Function([dynamic value])? _getRoutingPath(String? route) {
     assert(_computedMap.containsKey(route),
         '$route is not present in the computed dictionary');
 
-    return _computedMap[route];
+    return _computedMap[route!];
   }
 
   Route onGenerateRoute(RouteSettings routeSettings) {
     final Route Function([dynamic value]) _routeBuilder =
-        _getRoutingPath(routeSettings.name);
+        _getRoutingPath(routeSettings.name)!;
 
     logger?.call(routeSettings.name);
 

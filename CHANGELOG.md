@@ -1,3 +1,7 @@
+## [0.0.3] - 11-02-2021.
+
+* Migrating to null-safety
+
 ## [0.0.2] - 03-02-2021.
 
 * Moving view argument from Widget to Function() => Widget
