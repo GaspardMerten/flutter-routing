@@ -27,7 +27,8 @@ class NorseViewPath<T, A> extends BuildableNorsePath<T, A> {
 
   final String? name;
 
-  NorseViewPath({this.children, required this.view, this.name}) : assert(view != null);
+  NorseViewPath({this.children, required this.view, this.name})
+      : assert(view != null);
 
   @override
   Route<A> buildRoute([T? value]) {
