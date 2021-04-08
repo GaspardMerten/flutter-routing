@@ -27,8 +27,7 @@ class NorseViewPath<T, A> extends BuildableNorsePath<T, A> {
 
   final String? name;
 
-  NorseViewPath({this.children, required this.view, this.name})
-      : assert(view != null);
+  NorseViewPath({this.children, required this.view, this.name});
 
   @override
   Route<A> buildRoute([T? value]) {
@@ -41,15 +40,16 @@ class NorseViewBuilderPath<T extends Object, A extends Object>
     extends BuildableNorsePath<T, A> {
   final List<NorsePath>? children;
 
-  final Function(T? value) widgetBuilder;
+  final Function(T value) widgetBuilder;
 
   final String? name;
 
   @override
   Route<A> buildRoute([T? value]) {
-    return NorseRouter.routeBuilder<A>(widgetBuilder(value));
+    assert(value != null);
+
+    return NorseRouter.routeBuilder<A>(widgetBuilder(value!));
   }
 
-  NorseViewBuilderPath({this.children, required this.widgetBuilder, this.name})
-      : assert(widgetBuilder != null);
+  NorseViewBuilderPath({this.children, required this.widgetBuilder, this.name});
 }

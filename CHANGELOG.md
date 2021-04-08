@@ -1,4 +1,8 @@
-## [0.0.3] - 11-02-2021.
+## [0.1.1] - 08-04-2021.
+
+* Improving null safety
+
+## [0.1.0] - 11-02-2021.
 
 * Migrating to null-safety
 
