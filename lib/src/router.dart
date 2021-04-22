@@ -41,8 +41,8 @@ class NorseRouter {
     if (newPath == null && latestPath != null) {
       NorsePath currentPath = latestPath!;
 
-      for (final String partialPath in route!.split('/').where((e) => e.isNotEmpty)) {
-
+      for (final String partialPath
+          in route!.split('/').where((e) => e.isNotEmpty)) {
         if (partialPath == '..' && currentPath.parent != null) {
           currentPath = currentPath.parent!;
         } else {

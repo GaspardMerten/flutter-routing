@@ -42,9 +42,9 @@ abstract class BuildableNorsePath<T extends Object?, A extends Object?>
     extends NorsePath<T, A> {
   BuildableNorsePath(String name, [List<NorsePath> children = const []])
       : super(
-    name: name,
-    children: children,
-  );
+          name: name,
+          children: children,
+        );
 
   Route<A> buildRoute([T? value]);
 }

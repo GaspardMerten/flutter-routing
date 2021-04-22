@@ -1,3 +1,8 @@
+## [0.1.2] - 22-04-2021.
+
+* Adding the relative routing based navigation system.
+* Adding tests
+
 ## [0.1.1] - 08-04-2021.
 
 * Improving null safety
