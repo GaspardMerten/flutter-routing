@@ -1,6 +1,7 @@
 # Routing
 
-An object-oriented package allowing you to build up a navigation tree from well-defined classes.
+An object-oriented package allowing you to build up a navigation tree from well-defined classes and to use
+relative navigation.
 
 You can also use it to have named routes with <b>typed</b> arguments.
 
@@ -66,5 +67,11 @@ MaterialApp(
 
 Navigator.of(context).pushNamed('/public/login');
 
+Navigator.of(context).pushNamed('/public');
+// shorthand version
+navTo(context, '/public');
 
+// Relative routing based navigation
+navTo(context, 'login');
+navTo(context, '../register');
 ```

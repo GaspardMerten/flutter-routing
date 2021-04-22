@@ -1,33 +1,62 @@
-import 'package:flutter/material.dart' show Route, immutable, Widget;
+import 'package:flutter/material.dart' show Route, Widget;
 
 import 'router.dart';
 
+/// A class representing a node in the navigation tree.
 class NorsePath<T extends Object?, A extends Object?> {
-  NorsePath({this.name, this.children});
+  NorsePath({this.parent, required this.name, this.children = const []})
+      : childrenDict = Map.fromIterable(children, key: (e) => e.name) {
+    children.forEach(_populateChild);
+  }
 
-  final String? name;
+  /// A link to the parent [NorsePath] path. A parent-child link is when
+  /// a path (the child) is contained inside the children field of another path (the parent).
+  ///
+  /// The field is populated in the parent's constructor and is used to accelerate
+  /// the relative-rooting based navigation.
+  late NorsePath? parent;
 
-  final List<NorsePath>? children;
+  /// A [Map] field populated in this object's constructor to allow faster
+  /// relative-rooting based navigation by creating a more efficient way
+  /// to retrieve a child based on his name.
+  ///
+  /// Otherwise calling [children.where] would be mandatory to check/get a child
+  /// of this object.
+  final Map<String, NorsePath> childrenDict;
+
+  /// The name that will be used to access this path using the [NorseRouter.routeBuilder]
+  /// method.
+  final String name;
+
+  /// An optional list of path.
+  /// If this object's name field is 'home' and one of the child's name is 'profile'.
+  /// Accessing the child will be achieved using the following url '/home/profile'.
+  /// Or if the user is already on the home page, '/profile' using the relative-rooting
+  /// based navigation.
+  final List<NorsePath> children;
+
+  void _populateChild(NorsePath child) => child.parent = this;
 }
 
 abstract class BuildableNorsePath<T extends Object?, A extends Object?>
     extends NorsePath<T, A> {
-  String? get name;
-
-  List<NorsePath>? get children;
+  BuildableNorsePath(String name, [List<NorsePath> children = const []])
+      : super(
+    name: name,
+    children: children,
+  );
 
   Route<A> buildRoute([T? value]);
 }
 
-@immutable
 class NorseViewPath<T, A> extends BuildableNorsePath<T, A> {
-  final List<NorsePath>? children;
+  NorseViewPath({
+    required String name,
+    required this.view,
+    List<NorsePath> children = const [],
+  }) : super(name, children);
 
   final Widget Function() view;
-
-  final String? name;
-
-  NorseViewPath({this.children, required this.view, this.name});
 
   @override
   Route<A> buildRoute([T? value]) {
@@ -35,14 +64,15 @@ class NorseViewPath<T, A> extends BuildableNorsePath<T, A> {
   }
 }
 
-@immutable
 class NorseViewBuilderPath<T extends Object, A extends Object>
     extends BuildableNorsePath<T, A> {
-  final List<NorsePath>? children;
+  NorseViewBuilderPath({
+    required String name,
+    required this.widgetBuilder,
+    List<NorsePath> children = const [],
+  }) : super(name, children);
 
   final Function(T value) widgetBuilder;
-
-  final String? name;
 
   @override
   Route<A> buildRoute([T? value]) {
@@ -50,6 +80,4 @@ class NorseViewBuilderPath<T extends Object, A extends Object>
 
     return NorseRouter.routeBuilder<A>(widgetBuilder(value!));
   }
-
-  NorseViewBuilderPath({this.children, required this.widgetBuilder, this.name});
 }

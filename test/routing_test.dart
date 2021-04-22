@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_routing/flutter_routing.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 Widget viewBuilder(String name) => Scaffold(body: Center(child: Text(name)));
 
@@ -41,4 +42,18 @@ void main() {
           ]),
     ])
   ]);
+
+  test('Simple tree navigation', () {
+    expect(tree.onGenerateRoute(RouteSettings(name: '/public')),  isNotNull);
+    expect(tree.onGenerateRoute(RouteSettings(name: '/public/login')),  isNotNull);
+    expect(tree.onGenerateRoute(RouteSettings(name: '/public/register')),  isNotNull);
+  });
+
+  test('Relative tree navigation', () {
+    expect(tree.onGenerateRoute(RouteSettings(name: '/public')),  isNotNull);
+    expect(tree.onGenerateRoute(RouteSettings(name: 'login')),  isNotNull);
+    expect(tree.onGenerateRoute(RouteSettings(name: '../register')),  isNotNull);
+    expect(tree.onGenerateRoute(RouteSettings(name: '../login')),  isNotNull);
+    expect(tree.onGenerateRoute(RouteSettings(name: '../register/flow/godfather')),  isNotNull);
+  });
 }
