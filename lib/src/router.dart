@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart'
-    show BuildContext, MaterialPageRoute, Route, RouteSettings, Widget;
-
-import 'paths.dart';
+import 'package:flutter/material.dart';
+import 'observer.dart';
+import 'paths.dart' show BuildableNorsePath, NorsePath;
 
 final Route<A> Function<A>(Widget view) _kDefaultRouteWidgetBuilder =
     <A>(Widget view) {
@@ -15,12 +14,18 @@ class NorseRouter {
 
   final List<NorsePath> children;
 
+  late NorseObserver observer = NorseObserver(_updateLatestPath);
+
   BuildableNorsePath? latestPath;
 
   NorseRouter({this.children = const [], this.logger, this.basePath = ''}) {
     for (final NorsePath path in children) {
       this._populateComputedMap(basePath, path);
     }
+  }
+
+  void _updateLatestPath(String newStringPath) {
+    latestPath = _computedMap[newStringPath];
   }
 
   void _populateComputedMap(String previousPath, NorsePath _rootingPath) {

@@ -50,10 +50,14 @@ void main() {
   });
 
   test('Relative tree navigation', () {
+
     expect(tree.onGenerateRoute(RouteSettings(name: '/public')),  isNotNull);
     expect(tree.onGenerateRoute(RouteSettings(name: 'login')),  isNotNull);
     expect(tree.onGenerateRoute(RouteSettings(name: '../register')),  isNotNull);
     expect(tree.onGenerateRoute(RouteSettings(name: '../login')),  isNotNull);
     expect(tree.onGenerateRoute(RouteSettings(name: '../register/flow/godfather')),  isNotNull);
+
+    tree.observer.setCurrentRoute('/public/register');
+    expect(tree.onGenerateRoute(RouteSettings(name: 'flow/godfather')),  isNotNull);
   });
 }

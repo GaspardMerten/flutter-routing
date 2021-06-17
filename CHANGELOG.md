@@ -1,3 +1,7 @@
+## [0.1.3] - 17-06-2021.
+
+* Adding a NorseObserver to handle pop logic for relative rooting
+
 ## [0.1.2] - 22-04-2021.
 
 * Adding the relative routing based navigation system.
