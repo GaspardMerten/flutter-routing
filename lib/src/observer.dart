@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class NorseObserver extends NavigatorObserver {
   NorseObserver(this.onPop);
@@ -7,6 +7,8 @@ class NorseObserver extends NavigatorObserver {
 
   @override
   void didPop(Route route, Route? previousRoute) {
-    onPop();
+    if (!(route is DialogRoute)) {
+      onPop();
+    }
   }
 }

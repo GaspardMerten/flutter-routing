@@ -1,3 +1,11 @@
+## [0.1.5] - 17-06-2021.
+
+* Adding the ability to handle DialogRoute
+
+## [0.1.4] - 17-06-2021.
+
+* Improving the use of the NorseObserver
+
 ## [0.1.3] - 17-06-2021.
 
 * Adding a NorseObserver to handle pop logic for relative rooting
