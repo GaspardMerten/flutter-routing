@@ -14,7 +14,7 @@ class NorseRouter {
 
   final List<NorsePath> children;
 
-  late NorseObserver observer = NorseObserver(_updateLatestPath);
+  late NorseObserver observer = NorseObserver(() => _onRoutePopped(latestPath!.parent));
 
   BuildableNorsePath? latestPath;
 
@@ -24,8 +24,14 @@ class NorseRouter {
     }
   }
 
-  void _updateLatestPath(String newStringPath) {
-    latestPath = _computedMap[newStringPath];
+  void _onRoutePopped(NorsePath? parent) {
+    if (parent != null) {
+      if (parent is BuildableNorsePath) {
+        latestPath = parent;
+      } else {
+        _onRoutePopped(parent.parent);
+      }
+    }
   }
 
   void _populateComputedMap(String previousPath, NorsePath _rootingPath) {
