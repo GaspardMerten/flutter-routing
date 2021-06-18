@@ -7,7 +7,7 @@ class NorseObserver extends NavigatorObserver {
 
   @override
   void didPop(Route route, Route? previousRoute) {
-    if (!(route is DialogRoute || route is OverlayRoute)) {
+    if (route is PageRoute) {
       onPop();
     }
   }

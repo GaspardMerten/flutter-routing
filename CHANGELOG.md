@@ -1,3 +1,7 @@
+## [0.1.7] - 18-06-2021.
+
+* Restricting pop-handle to PageRoute 
+
 ## [0.1.6] - 18-06-2021.
 
 * Adding support for OverlayRoute
