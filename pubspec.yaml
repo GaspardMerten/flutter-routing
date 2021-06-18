@@ -1,6 +1,6 @@
 name: flutter_routing
 description: An object-oriented package allowing you to build up a navigation tree from well-defined classes.
-version: 0.1.5
+version: 0.1.6
 homepage: https://github.com/GaspardMerten/flutter-routing
 
 environment:

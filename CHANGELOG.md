@@ -1,3 +1,7 @@
+## [0.1.6] - 18-06-2021.
+
+* Adding support for OverlayRoute
+
 ## [0.1.5] - 17-06-2021.
 
 * Adding the ability to handle DialogRoute
