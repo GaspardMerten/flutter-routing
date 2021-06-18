@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'observer.dart';
 import 'paths.dart' show BuildableNorsePath, NorsePath;
 
@@ -14,7 +15,8 @@ class NorseRouter {
 
   final List<NorsePath> children;
 
-  late NorseObserver observer = NorseObserver(() => _onRoutePopped(latestPath!.parent));
+  late NorseObserver observer =
+      NorseObserver(() => _onRoutePopped(latestPath!.parent));
 
   BuildableNorsePath? latestPath;
 
@@ -75,6 +77,8 @@ class NorseRouter {
     if (newPath is BuildableNorsePath) {
       latestPath = newPath;
 
+      logger?.call(newPath.buildPath());
+
       return newPath.buildRoute;
     } else {
       throw Exception(
@@ -85,8 +89,6 @@ class NorseRouter {
   Route onGenerateRoute(RouteSettings routeSettings) {
     final Route Function([dynamic value]) _routeBuilder =
         _getRoutingPath(routeSettings.name)!;
-
-    logger?.call(routeSettings.name!);
 
     return _routeBuilder(routeSettings.arguments);
   }

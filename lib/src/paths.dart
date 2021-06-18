@@ -36,6 +36,14 @@ class NorsePath<T extends Object?, A extends Object?> {
   final List<NorsePath> children;
 
   void _populateChild(NorsePath child) => child.parent = this;
+
+  String buildPath() {
+    final String _path = '/$name';
+    if (parent != null) {
+      return parent!.buildPath() + _path;
+    }
+    return _path;
+  }
 }
 
 abstract class BuildableNorsePath<T extends Object?, A extends Object?>
