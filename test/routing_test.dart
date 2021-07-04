@@ -59,6 +59,6 @@ void main() {
 
     tree.observer.onPop();
 
-    expect(tree.onGenerateRoute(RouteSettings(name: 'flow/godfather')),  isNotNull);
+    expect(tree.onGenerateRoute(RouteSettings(name: '../register')),  isNotNull);
   });
 }

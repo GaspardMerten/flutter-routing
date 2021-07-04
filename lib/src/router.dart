@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
 import 'observer.dart';
@@ -15,10 +17,12 @@ class NorseRouter {
 
   final List<NorsePath> children;
 
-  late NorseObserver observer =
-      NorseObserver(() => _onRoutePopped(latestPath!.parent));
+  late NorseObserver observer = NorseObserver(() {
+    _onRoutePopped(latestPath!.parent);
+  });
 
   BuildableNorsePath? latestPath;
+  Queue<BuildableNorsePath> previousPaths = Queue<BuildableNorsePath>();
 
   NorseRouter({this.children = const [], this.logger, this.basePath = ''}) {
     for (final NorsePath path in children) {
@@ -27,7 +31,9 @@ class NorseRouter {
   }
 
   void _onRoutePopped(NorsePath? parent) {
-    if (parent != null) {
+    if (previousPaths.isNotEmpty) {
+      latestPath = previousPaths.removeLast();
+    } else if (parent != null) {
       if (parent is BuildableNorsePath) {
         latestPath = parent;
       } else {
@@ -75,6 +81,10 @@ class NorseRouter {
     }
 
     if (newPath is BuildableNorsePath) {
+      if (latestPath != null) {
+        previousPaths.add(latestPath!);
+      }
+
       latestPath = newPath;
 
       logger?.call(newPath.buildPath());

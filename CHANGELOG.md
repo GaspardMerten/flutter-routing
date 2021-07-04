@@ -1,3 +1,11 @@
+## [0.1.9] - 04-07-2021.
+
+* Adding a QUEUE system for keeping track of navigation
+
+## [0.1.8] - 18-06-2021.
+
+* Fixing an issue with the analytics system
+
 ## [0.1.7] - 18-06-2021.
 
 * Restricting pop-handle to PageRoute 

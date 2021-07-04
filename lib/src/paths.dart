@@ -55,6 +55,11 @@ abstract class BuildableNorsePath<T extends Object?, A extends Object?>
         );
 
   Route<A> buildRoute([T? value]);
+
+  @override
+  String toString() {
+    return buildPath();
+  }
 }
 
 class NorseViewPath<T, A> extends BuildableNorsePath<T, A> {
