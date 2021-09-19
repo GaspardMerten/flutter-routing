@@ -1,6 +1,10 @@
+## [0.1.10] - 19-09-2021.
+
+* Improving exception management
+
 ## [0.1.9] - 04-07-2021.
 
-* Adding a QUEUE system for keeping track of navigation
+* Adding a QUEUE system for keeping track of navigation 
 
 ## [0.1.8] - 18-06-2021.
 

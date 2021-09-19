@@ -80,6 +80,10 @@ class NorseRouter {
       }
     }
 
+    if (newPath == null) {
+      throw Exception('No matching path was found for $route');
+    }
+
     if (newPath is BuildableNorsePath) {
       if (latestPath != null) {
         previousPaths.add(latestPath!);
