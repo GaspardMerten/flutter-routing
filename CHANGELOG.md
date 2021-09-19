@@ -1,3 +1,7 @@
+## [0.1.11] - 19-09-2021.
+
+* Adding RouteSettings (with name) to the default route builder
+
 ## [0.1.10] - 19-09-2021.
 
 * Improving exception management

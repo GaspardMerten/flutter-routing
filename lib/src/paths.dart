@@ -73,7 +73,7 @@ class NorseViewPath<T, A> extends BuildableNorsePath<T, A> {
 
   @override
   Route<A> buildRoute([T? value]) {
-    return NorseRouter.routeBuilder<A>(view());
+    return NorseRouter.routeBuilder<A>(view(), this);
   }
 }
 
@@ -91,6 +91,6 @@ class NorseViewBuilderPath<T extends Object, A extends Object>
   Route<A> buildRoute([T? value]) {
     assert(value != null);
 
-    return NorseRouter.routeBuilder<A>(widgetBuilder(value!));
+    return NorseRouter.routeBuilder<A>(widgetBuilder(value!), this);
   }
 }

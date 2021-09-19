@@ -5,9 +5,14 @@ import 'package:flutter/material.dart';
 import 'observer.dart';
 import 'paths.dart' show BuildableNorsePath, NorsePath;
 
-final Route<A> Function<A>(Widget view) _kDefaultRouteWidgetBuilder =
-    <A>(Widget view) {
-  return MaterialPageRoute<A>(builder: (BuildContext context) => view);
+final Route<A> Function<A>(Widget view, NorsePath path)
+    _kDefaultRouteWidgetBuilder = <A>(Widget view, NorsePath path) {
+  return MaterialPageRoute<A>(
+    builder: (BuildContext context) => view,
+    settings: RouteSettings(
+      name: path.buildPath(),
+    ),
+  );
 };
 
 class NorseRouter {
@@ -109,6 +114,6 @@ class NorseRouter {
 
   final Map<String, BuildableNorsePath> _computedMap = {};
 
-  static Route<A> Function<A>(Widget view) routeBuilder =
+  static Route<A> Function<A>(Widget view, NorsePath path) routeBuilder =
       _kDefaultRouteWidgetBuilder;
 }
